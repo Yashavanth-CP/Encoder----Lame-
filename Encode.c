@@ -3,6 +3,8 @@
 #include "Encode.h"
 #include<string.h>
 
+/* This routine used to modify the name of the file from 
+   *.wav to *.mp3 */
 char* getDestName(char* src){
 
             if(src == NULL)
@@ -39,6 +41,8 @@ char* getDestName(char* src){
            return dest;
 }  
 
+/* Used for trimming the Directory path with / character */
+
 void trim(char* str)
           {
              if(str == NULL)
@@ -60,6 +64,10 @@ void trim(char* str)
             }
 }
 
+/* Set the filename with the path also.
+   1. inputs(name, path)
+   2. Output( path/name)
+*/
              
 char* SetFullPath(char* name, char* path){
 
@@ -79,6 +87,11 @@ char* SetFullPath(char* name, char* path){
      //            printf("Full path is %s \n", fullpath);      
                  return fullpath;             
 }
+
+/* Main routine to encode the file using lame API ,
+   Since the API and library is of no interest to know.
+   Did minimal work to encode. However, can be extended
+   with additional functionalities */
        
 void Encoder(char* src, char* dst){
  
@@ -125,6 +138,7 @@ void Encoder(char* src, char* dst){
   
             }
 
+/* Process called from each thread */
 void Process(char* path, char* name){
 
           // char* path = "/home/yash/Desktop/Sounds";
@@ -145,7 +159,6 @@ void Process(char* path, char* name){
 
            if(dstfile != NULL)
               dstpath = SetFullPath(dstfile, path1);
-           //free(fullpath);
 
          //  printf(" Srcpath :%s \n", srcpath);
          //  printf(" Dstpath :%s \n", dstpath);
